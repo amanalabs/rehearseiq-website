@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RehearseIQ - AI-Powered Skill Retention & Mastery</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --purple-deep: #581c87;
+      --purple-mid: #7c3aed;
+      --purple-light: #a78bfa;
+      --magenta: #db2777;
+      --magenta-light: #f472b6;
+      --white: #ffffff;
+      --gray-50: #fafafa;
+      --gray-100: #f4f4f5;
+      --gray-200: #e4e4e7;
+      --gray-600: #52525b;
+      --gray-800: #27272a;
+      --gray-900: #18181b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--gray-800);
+      line-height: 1.6;
+      background: var(--white);
+    }
+
+    /* Navigation */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--purple-mid), var(--magenta));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+    }
+
+    .logo-sub {
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--gray-600);
+      display: block;
+      -webkit-text-fill-color: var(--gray-600);
+      letter-spacing: 0.05em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--gray-600);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--purple-mid);
+    }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--purple-mid), var(--magenta));
+      color: var(--white) !important;
+      padding: 0.6rem 1.25rem;
+      border-radius: 6px;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-mid) 50%, var(--magenta) 100%);
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--purple-mid);
+      padding: 1rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 2rem;
+    }
+
+    .section-container {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--magenta);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .section-text {
+      font-size: 1.1rem;
+      color: var(--gray-600);
+      max-width: 700px;
+      line-height: 1.8;
+    }
+
+    /* Problem Section */
+    .problem {
+      background: var(--gray-50);
+    }
+
+    .problem-highlight {
+      background: linear-gradient(135deg, var(--purple-deep), var(--magenta));
+      color: var(--white);
+      padding: 2rem;
+      border-radius: 12px;
+      margin-top: 2.5rem;
+      font-size: 1.15rem;
+      font-weight: 500;
+    }
+
+    .problem-list {
+      margin-top: 2rem;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .problem-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .problem-item:last-child {
+      border-bottom: none;
+    }
+
+    .problem-icon {
+      width: 24px;
+      height: 24px;
+      background: var(--magenta-light);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 0.25rem;
+    }
+
+    /* Solution Section */
+    .solution-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .solution-card {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .solution-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .solution-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--purple-light), var(--magenta-light));
+      border-radius: 10px;
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+    }
+
+    .solution-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .solution-card p {
+      color: var(--gray-600);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* How It Works Section */
+    .how-it-works {
+      background: var(--gray-50);
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .step {
+      text-align: center;
+      padding: 1.5rem;
+    }
+
+    .step-number {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--purple-mid), var(--magenta));
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 0 auto 1.25rem;
+    }
+
+    .step h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 0.75rem;
+    }
+
+    .step p {
+      color: var(--gray-600);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    /* About Section */
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .about-stats {
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      padding: 1.5rem;
+      background: linear-gradient(135deg, var(--purple-deep), var(--magenta));
+      border-radius: 12px;
+      color: var(--white);
+    }
+
+    .stat-number {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .about-text p {
+      color: var(--gray-600);
+      font-size: 1.05rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* CTA Section */
+    .cta {
+      background: linear-gradient(135deg, var(--purple-deep) 0%, var(--purple-mid) 50%, var(--magenta) 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .cta .section-container {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta .section-title {
+      color: var(--white);
+    }
+
+    .cta .section-text {
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0 auto 2.5rem;
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--white);
+      color: var(--purple-mid);
+      padding: 1rem 2.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.05rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--gray-900);
+      color: var(--gray-200);
+      padding: 3rem 2rem;
+    }
+
+    .footer-content {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .footer-brand span {
+      font-size: 0.85rem;
+      font-weight: 400;
+      color: var(--gray-200);
+      display: block;
+      margin-top: 0.25rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+    }
+
+    .footer-links a {
+      color: var(--gray-200);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--white);
+    }
+
+    .footer-copy {
+      width: 100%;
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.85rem;
+      color: var(--gray-600);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .about-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-content {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        RehearseIQ
+        <span class="logo-sub">by Amana Labs</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#problem">The Problem</a></li>
+        <li><a href="#solution">Solution</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge">AI-Powered Workforce Learning</span>
+      <h1>Make Training Stick. Visualise Mastery.</h1>
+      <p class="hero-subtitle">
+        RehearseIQ is the retention layer for corporate learning. We turn training into durable capability using AI and
+        cognitive science — so your workforce actually remembers what they learn.
+      </p>
+      <a href="#contact" class="hero-cta">
+        Start a Pilot Programme →
+      </a>
+    </div>
+  </section>
+
+  <!-- Problem Section -->
+  <section class="problem" id="problem">
+    <div class="section-container">
+      <span class="section-label">The Challenge</span>
+      <h2 class="section-title">Training Happens. Forgetting Happens Faster.</h2>
+      <p class="section-text">
+        Organisations invest significantly in onboarding, compliance, and skill-building programmes. But most programmes
+        stop at completion and never address what happens afterwards.
+      </p>
+
+      <div class="problem-list">
+        <div class="problem-item">
+          <div class="problem-icon"></div>
+          <p>Skills and knowledge decay without systematic reinforcement</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon"></div>
+          <p>One-off assessments do not predict long-term capability</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon"></div>
+          <p>Retraining cycles consume time and budget repeatedly</p>
+        </div>
+        <div class="problem-item">
+          <div class="problem-icon"></div>
+          <p>L&D teams lack visibility into who mastered what — and whether they still retain it</p>
+        </div>
+      </div>
+
+      <div class="problem-highlight">
+        <strong>The Core Issue:</strong> Training without retention is wasted investment.
+      </div>
+    </div>
+  </section>
+
+  <!-- Solution Section -->
+  <section class="solution" id="solution">
+    <div class="section-container">
+      <span class="section-label">The Solution</span>
+      <h2 class="section-title">RehearseIQ Turns Training into Durable Capability</h2>
+      <p class="section-text">
+        We convert training content into a structured reinforcement system that ensures knowledge is retained long after
+        the training event concludes.
+      </p>
+
+      <div class="solution-grid">
+        <div class="solution-card">
+          <div class="solution-icon">🤖</div>
+          <h3>AI-Assisted Content Conversion</h3>
+          <p>Transform your training materials into retrieval practice items automatically, with human review and
+            approval controls.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">⏱️</div>
+          <h3>Spaced Repetition Scheduling</h3>
+          <p>Based on memory science — systematic, not random. We time reviews for maximum retention.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">📊</div>
+          <h3>Mastery Tracking Over Time</h3>
+          <p>See strengths, weaknesses, and decay patterns at individual and cohort levels.</p>
+        </div>
+        <div class="solution-card">
+          <div class="solution-icon">👥</div>
+          <h3>Cohort Analytics for L&D</h3>
+          <p>Dashboards and exportable reports that show real retention metrics, not just completion rates.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works" id="how-it-works">
+    <div class="section-container">
+      <span class="section-label">The Process</span>
+      <h2 class="section-title">A Simple Loop That Builds Mastery Over Time</h2>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Ingest Content</h3>
+          <p>Upload documents, slides, SOPs, notes, or transcripts. Our AI ingestion pipeline processes them.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Generate Items</h3>
+          <p>AI drafts flashcards, Q&A pairs, and scenario prompts. Human review before deployment.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Daily Review</h3>
+          <p>Learners complete brief active recall sessions (5–10 min). Spaced scheduling optimises timing
+            automatically.</p>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Measure Mastery</h3>
+          <p>Individual and cohort dashboards display topic-level insight. Retention trends and exportable reports.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="section-container">
+      <span class="section-label">About</span>
+      <h2 class="section-title">Built by Amana Labs</h2>
+
+      <div class="about-content">
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-number">10+</div>
+            <div class="stat-label">Years in EdTech</div>
+          </div>
+          <div class="stat">
+            <div class="stat-number">2014</div>
+            <div class="stat-label">Established</div>
+          </div>
+        </div>
+        <div class="about-text">
+          <p>
+            Amana Labs was founded with a simple belief: technology should make learning better, not just easier to
+            administer. <em>Amana</em> means trust in Semitic languages — it is the foundation on which we build every
+            client relationship.
+          </p>
+          <p>
+            Over 10+ years, we've built products and delivered solutions for higher education institutions and
+            enterprises across North America. Our team combines deep expertise in cloud architecture, software
+            development, and learning science.
+          </p>
+          <p>
+            RehearseIQ represents the next evolution of our work — bringing AI-powered retention tools to workforce
+            upskilling markets, starting with Malaysia and Southeast Asia.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta" id="contact">
+    <div class="section-container">
+      <h2 class="section-title">Ready to Make Training Stick?</h2>
+      <p class="section-text">
+        We're launching pilot programmes with training providers and enterprise L&D teams. Let's talk about how
+        RehearseIQ can help your organisation measure and improve retention.
+      </p>
+      <a href="mailto:snur@amanalabs.com" class="cta-button">
+        Get in Touch →
+      </a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        RehearseIQ
+        <span>by Amana Labs</span>
+      </div>
+      <div class="footer-links">
+        <a href="https://www.amanalabs.com" target="_blank">Amana Labs</a>
+        <a href="mailto:snur@amanalabs.com">Contact</a>
+      </div>
+      <div class="footer-copy">
+        © 2025 Amana Labs. All rights reserved.
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>
